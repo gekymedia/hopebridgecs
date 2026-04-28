@@ -1,12 +1,12 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::view('/', 'pages.home')->name('home');
+Route::view('/our-care', 'pages.our-care')->name('our-care');
+Route::view('/demographics-served', 'pages.demographics')->name('demographics');
+Route::view('/about-us', 'pages.about')->name('about');
 
-Route::view('/our-care', 'home');
-Route::view('/demographics-served', 'home');
-Route::view('/about-us', 'home');
-Route::view('/contact-us', 'home');
+Route::get('/contact-us', [ContactController::class, 'show'])->name('contact');
+Route::post('/contact-us', [ContactController::class, 'store'])->name('contact.store');
