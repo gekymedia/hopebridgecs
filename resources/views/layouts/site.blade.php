@@ -8,7 +8,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    @vite(['resources/css/app.css'])
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css'])
+    @else
+        {{-- Avoid 500 when assets are missing; run npm ci && npm run build (or deploy.ps1 on production). --}}
+        <style>
+            body.site{margin:0;font-family:Inter,system-ui,sans-serif;color:#2c3345;line-height:1.6}
+            .site-container{width:min(1100px,92%);margin-inline:auto}
+            .site-topbar{background:#0f4c5c;color:#fff;text-align:center;padding:.65rem 1rem;font-size:.92rem}
+            .site-header{border-bottom:1px solid #e8ecf1;background:#fff;padding:1rem 0}
+            .site-header__inner{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem}
+            .site-logo{font-weight:700;color:#0f4c5c;text-decoration:none}
+            .site-nav{display:flex;flex-wrap:wrap;gap:.35rem 1rem}.site-nav a{color:#2c3345;font-weight:600;text-decoration:none}
+            .site-footer{border-top:1px solid #e8ecf1;padding:2rem 0;background:#f9fafb;color:#6b7280}
+        </style>
+    @endif
 </head>
 <body class="site">
     <div class="site-topbar">

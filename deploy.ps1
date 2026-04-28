@@ -11,5 +11,5 @@ if ($LASTEXITCODE -ne 0) { Write-Host "No changes to commit" -ForegroundColor Ye
 git push origin main
 
 Write-Host "Deploying to production..." -ForegroundColor Cyan
-$remoteCmd = 'cd /home/gekymedia/web/hopebridgecs.com/public_html && git pull origin main && composer install --no-dev --optimize-autoloader && (test -f scripts/ensure-hestia-env.sh && sudo -u gekymedia bash scripts/ensure-hestia-env.sh || true) && chown -R gekymedia:www-data /home/gekymedia/web/hopebridgecs.com/public_html && php artisan migrate --force && php artisan optimize:clear && php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan optimize && php artisan queue:restart'
+$remoteCmd = 'cd /home/gekymedia/web/hopebridgecs.com/public_html && git pull origin main && composer install --no-dev --optimize-autoloader && (test -f scripts/ensure-hestia-env.sh && sudo -u gekymedia bash scripts/ensure-hestia-env.sh || true) && (test -f scripts/build-frontend-if-node.sh && sudo -u gekymedia bash scripts/build-frontend-if-node.sh || true) && chown -R gekymedia:www-data /home/gekymedia/web/hopebridgecs.com/public_html && php artisan migrate --force && php artisan optimize:clear && php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan optimize && php artisan queue:restart'
 ssh root@gekymedia.com $remoteCmd
