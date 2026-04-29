@@ -49,7 +49,7 @@
     <footer class="site-footer">
         <div class="site-container">
             <p><strong>HopeBridge Community Services</strong> — Where hope meets opportunity.</p>
-            <p class="site-footer__muted">Phone: <a href="tel:+15713906222">571-390-6222</a></p>
+            <p class="site-footer__muted">Phone: <a href="tel:+17039811910">703-981-1910</a></p>
         </div>
     </footer>
 </body>
